@@ -1,71 +1,91 @@
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+/* RESET */
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:Arial, sans-serif;
 }
 
-body {
-  font-family: Arial, sans-serif;
-  line-height: 1.6;
-  background-color: #f4f4f4;
-  color: #333;
+/* HEADER */
+header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:20px 40px;
+  background:#222;
+  color:white;
+  position:sticky;
+  top:0;
 }
 
-
-header {
-  background-color: #004080;
-  color: white;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1rem 2rem;
+nav a{
+  color:white;
+  text-decoration:none;
+  margin-left:20px;
+  transition:0.3s;
 }
 
-.logo {
-  font-size: 1.5rem;
-  font-weight: bold;
+nav a:hover{
+  color:#00bcd4;
 }
 
-.nav-links {
-  list-style: none;
-  display: flex;
-  gap: 1.5rem;
+/* SECTIONS */
+section{
+  padding:60px 40px;
 }
 
-.nav-links a {
-  color: white;
-  text-decoration: none;
-  font-weight: bold;
+/* HERO */
+.hero{
+  height:60vh;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  background:#f4f4f4;
 }
 
-.nav-links a:hover {
-  text-decoration: underline;
+/* CARD */
+.card-container{
+  display:flex;
+  gap:20px;
+  flex-wrap:wrap;
 }
 
-
-.hero {
-  padding: 4rem 2rem;
-  text-align: center;
-  background-color: white;
+.card{
+  flex:1;
+  min-width:220px;
+  padding:20px;
+  border:1px solid #ddd;
+  border-radius:10px;
+  background:white;
+  transition:0.3s;
 }
 
-.hero h1 {
-  font-size: 2rem;
-  margin-bottom: 1rem;
+.card:hover{
+  transform:translateY(-5px);
 }
 
-.hero p {
-  max-width: 600px;
-  margin: 0 auto;
-  font-size: 1.1rem;
+/* FOOTER */
+footer{
+  background:#222;
+  color:white;
+  text-align:center;
+  padding:30px;
+  margin-top:40px;
 }
 
+/* RESPONSIVE */
+@media(max-width:768px){
+  header{
+    flex-direction:column;
+  }
 
-footer {
-  text-align: center;
-  padding: 1rem;
-  background-color: #004080;
-  color: white;
-  margin-top: 2rem;
+  nav{
+    margin-top:10px;
+  }
+
+  .card-container{
+    flex-direction:column;
+  }
 }
