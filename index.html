@@ -1,29 +1,271 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
   <meta charset="UTF-8">
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Home</title>
+
+  <title>Delivery Record Form</title>
+
   <link rel="stylesheet" href="style.css">
+
+  <script src="https://cdn.sheetjs.com/xlsx-0.20.0/package/dist/xlsx.full.min.js"></script>
+
 </head>
 
 <body>
 
-<header>
-  <div class="logo">My Company</div>
+<div class="container screen-only form-page">
 
-  <nav>
-    <a href="index.html">Home</a>
-    <a href="aboutus.html">About Us</a>
-    <a href="product.html">Products</a>
-    <a href="contactus.html">Contact</a>
-  </nav>
-</header>
+  <h1>Delivery Record Form</h1>
 
-<section class="hero">
-  <h1>Welcome to Our Company</h1>
-  <p>We provide high quality manufacturing solutions</p>
-</section>
+  <div class="top-section">
+
+    <div class="input-group invoice-group">
+
+      <label>Invoice No</label>
+
+      <div class="invoice-row">
+
+        <input
+          type="text"
+          id="invoiceNo"
+          class="form-field-input"
+          placeholder="Enter Invoice No"
+        >
+
+        <button type="button" class="new-inv-btn" onclick="newInvoice()">
+          New Inv
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="input-group delivery-date">
+
+    <label>Delivery Date</label>
+
+    <input
+      type="date"
+      id="deliveryDate"
+      class="form-field-input"
+    >
+
+  </div>
+
+  <div class="entry-header">
+
+    <h2>Production Entry</h2>
+
+    <button type="button" id="addRowBtn" onclick="addRow()">
+      + Add Row
+    </button>
+
+  </div>
+
+  <div class="table-scroll-wrap">
+
+  <table id="entryTable" class="app-table entry-table">
+
+    <thead>
+
+      <tr>
+
+        <th class="col-shrink col-num">
+          #
+        </th>
+
+        <th class="col-item">
+          Item(s)
+        </th>
+
+        <th class="col-shrink col-qty">
+          Quantity
+        </th>
+
+        <th class="col-fill col-batch">
+          Manufactured Code
+        </th>
+
+        <th class="col-shrink col-action">
+          Action
+        </th>
+
+      </tr>
+
+    </thead>
+
+    <tbody id="entryBody">
+
+      <tr>
+
+        <td class="col-shrink col-num row-num-cell">
+          <span class="row-num">1</span>
+        </td>
+
+        <td class="col-item-cell">
+
+          <textarea
+            class="item-input"
+            placeholder="Item"
+          ></textarea>
+
+        </td>
+
+        <td class="col-shrink col-qty-cell">
+
+          <input
+            type="number"
+            class="qty-input"
+            placeholder="Qty"
+          >
+
+        </td>
+
+        <td class="col-fill col-batch-cell">
+
+          <textarea
+            class="batch-input"
+            placeholder="A010126--1, SH010126--2 (4 per row)"
+            onblur="formatBatchInput(this)"
+          ></textarea>
+
+        </td>
+
+        <td class="col-shrink col-action action-cell">
+
+          <button
+            type="button"
+            class="delete-btn"
+            onclick="deleteRow(this)"
+          >
+            Delete
+          </button>
+
+        </td>
+
+      </tr>
+
+    </tbody>
+
+  </table>
+
+  </div>
+
+  <div class="bottom-buttons">
+
+    <div class="bottom-left-group">
+
+      <button type="button" class="btn-left" onclick="window.print()">
+        Print
+      </button>
+
+      <button type="button" onclick="exportDeliveryExcel()">
+        Export Excel
+      </button>
+
+    </div>
+
+    <button type="button" class="btn-center" onclick="saveRecord()">
+      Save Record
+    </button>
+
+    <button type="button" class="btn-right" onclick="goToRecords()">
+      View Record
+    </button>
+
+  </div>
+
+  <div class="current-record">
+
+    <h2>Current Invoice Record</h2>
+
+    <div class="table-scroll-wrap">
+
+      <table id="currentRecordTable" class="app-table records-table">
+
+        <thead>
+
+          <tr>
+
+            <th class="col-shrink col-invoice">Invoice</th>
+
+            <th class="col-fill col-item">Item</th>
+
+            <th class="col-shrink col-op">Operator</th>
+
+            <th class="col-shrink col-date">Date</th>
+
+            <th class="col-shrink col-qty">Qty</th>
+
+            <th class="col-shrink col-combine">Combine</th>
+
+            <th class="col-shrink col-action">Action</th>
+
+          </tr>
+
+        </thead>
+
+        <tbody id="currentRecordBody"></tbody>
+
+      </table>
+
+    </div>
+
+  </div>
+
+</div>
+
+<!-- PRINT AREA -->
+
+<div id="printArea" class="print-sheet">
+
+  <div class="print-content">
+
+    <table class="print-table">
+
+      <thead>
+
+        <tr>
+
+          <th class="print-col-item">
+            Item(s)
+          </th>
+
+          <th class="print-col-qty">
+            Quantity
+          </th>
+
+          <th class="print-col-batch">
+            Manufactured Code
+          </th>
+
+        </tr>
+
+      </thead>
+
+      <tbody id="printBody"></tbody>
+
+    </table>
+
+    <div class="delivered-on">
+
+      Delivered on:
+      <span id="printDeliveryDate"></span>
+
+    </div>
+
+  </div>
+
+</div>
+
+<script src="batch-utils.js"></script>
+<script src="table-render.js"></script>
+<script src="script.js"></script>
 
 </body>
 </html>

@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Production Record</title>
+
+  <link rel="stylesheet" href="style.css">
+
+  <script src="https://cdn.sheetjs.com/xlsx-0.20.0/package/dist/xlsx.full.min.js"></script>
+
+</head>
+
+<body>
+
+<div class="container records-page">
+
+  <h1>Production Record</h1>
+
+  <div class="records-toolbar">
+
+    <div class="records-toolbar-left">
+
+      <a href="index.html">
+
+        <button type="button">
+          Back to Delivery Record Form
+        </button>
+
+      </a>
+
+    </div>
+
+    <div class="records-toolbar-center">
+
+      <input
+        type="text"
+        id="searchInput"
+        class="records-search"
+        placeholder="Search Invoice / Item / Operator"
+        onkeyup="searchRecord()"
+      >
+
+    </div>
+
+    <div class="records-toolbar-right">
+
+      <button type="button" onclick="exportExcel()">
+        Export Excel
+      </button>
+
+    </div>
+
+  </div>
+
+  <div class="records-filters">
+
+    <input
+      type="text"
+      id="filterInvoice"
+      class="filter-input"
+      placeholder="Filter Invoice"
+      onkeyup="applyFilters()"
+    >
+
+    <input
+      type="text"
+      id="filterItem"
+      class="filter-input"
+      placeholder="Filter Item"
+      onkeyup="applyFilters()"
+    >
+
+    <input
+      type="text"
+      id="filterOperator"
+      class="filter-input"
+      placeholder="Filter Operator"
+      onkeyup="applyFilters()"
+    >
+
+    <button type="button" class="filter-clear-btn" onclick="clearFilters()">
+      Clear Filters
+    </button>
+
+  </div>
+
+  <div class="table-scroll-wrap">
+
+  <table id="recordTable" class="app-table records-table">
+
+    <thead>
+
+      <tr>
+
+        <th class="col-shrink col-invoice">Invoice</th>
+
+        <th class="col-fill col-item">Item</th>
+
+        <th class="col-shrink col-op">Operator</th>
+
+        <th class="col-shrink col-date">Date</th>
+
+        <th class="col-shrink col-qty">Qty</th>
+
+        <th class="col-shrink col-combine">Combine</th>
+
+        <th class="col-shrink col-action">Action</th>
+
+      </tr>
+
+    </thead>
+
+    <tbody id="recordBody"></tbody>
+
+  </table>
+
+  </div>
+
+  <div class="pagination">
+
+    <button type="button" id="prevPage" onclick="goToPage(currentPage - 1)">
+      Previous
+    </button>
+
+    <span id="pageInfo">Page 1 of 1</span>
+
+    <button type="button" id="nextPage" onclick="goToPage(currentPage + 1)">
+      Next
+    </button>
+
+    <label class="page-jump" for="pageInput">
+      Go to page
+    </label>
+
+    <input
+      type="number"
+      id="pageInput"
+      class="page-input"
+      min="1"
+      value="1"
+      onkeydown="if(event.key==='Enter')goToPageFromInput()"
+    >
+
+    <button type="button" onclick="goToPageFromInput()">
+      Go
+    </button>
+
+  </div>
+
+</div>
+
+<script src="batch-utils.js"></script>
+<script src="table-render.js"></script>
+<script src="records.js"></script>
+
+</body>
+</html>
